@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bare Clinic - Regenerative Aesthetics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=hk-grotesk@300,400,500&display=swap" rel="stylesheet">
+<style>
+
+/* ─── RESET & TOKENS ─── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#f8f1e7;
+  --dark:#140a09;
+  --sage:#9aa6a6;
+  --golden:#9d8860;
+  --terra:#94573d;
+  --serif:'HK Grotesk','Cormorant Garamond',Georgia,sans-serif;
+  --sans:'HK Grotesk','DM Sans',system-ui,sans-serif;
+  --pad:80px 64px;
+  --max:1400px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--cream);color:var(--dark);font-family:var(--sans);overflow-x:hidden}
+::-webkit-scrollbar{width:2px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:var(--terra)}
+::selection{background:var(--terra);color:var(--cream)}
+
+
+/* ─── SHARED UTILS ─── */
+.wrap{max-width:var(--max);margin:0 auto}
+.eyebrow{
+  font-family:var(--sans);font-size:.67rem;font-weight:400;
+  letter-spacing:.24em;text-transform:uppercase;
+  display:flex;align-items:center;gap:1.2rem;margin-bottom:2.8rem;
+}
+.eyebrow::before{content:'';width:30px;height:1px;background:currentColor;opacity:.55;flex-shrink:0}
+
+/* ─── NAVBAR ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  height:80px;padding:0 64px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--cream);
+  border-bottom:1px solid rgba(148,87,61,.12);
+}
+.nav-logo{text-decoration:none;flex-shrink:0;display:flex;align-items:center}
+.logo-img{height:108px;width:auto;display:block}
+.nav-links{display:flex;gap:2.8rem;list-style:none;align-items:center}
+.nav-links a{
+  font-family:var(--sans);font-size:.7rem;font-weight:300;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(20,10,9,.75);text-decoration:none;
+  transition:color .35s;
+}
+.nav-links a:hover{color:var(--dark)}
+.nav-cta{
+  font-family:var(--sans);font-size:.7rem;font-weight:400;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--cream);background:var(--golden);
+  border:none;padding:.72rem 1.9rem;text-decoration:none;
+  display:inline-block;flex-shrink:0;transition:background .35s ease;
+}
+.nav-cta:hover{background:#8a7450}
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  background:none;border:none;padding:4px;cursor:none;
+}
+.hamburger span{width:22px;height:1px;background:var(--terra);transition:all .3s;display:block}
+
+/* MOBILE MENU */
+.mob-menu{
+  position:fixed;inset:0;background:var(--dark);z-index:998;
+  display:flex;flex-direction:column;justify-content:center;
+  align-items:center;gap:2.5rem;
+  transform:translateX(100%);transition:transform .42s ease;
+}
+.mob-menu.open{transform:translateX(0)}
+.mob-menu a{
+  font-family:var(--serif);font-size:3rem;font-weight:300;
+  color:var(--cream);text-decoration:none;transition:color .3s;
+}
+.mob-menu a:hover{color:var(--terra)}
+.mob-close{
+  position:absolute;top:2rem;right:2rem;
+  background:none;border:none;color:var(--cream);
+  font-family:var(--sans);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  cursor:none;padding:.5rem;
+}
+
+/* ═══ HERO ═══ */
+#hero{
+  min-height:100vh;background:var(--terra);
+  display:grid;grid-template-columns:1fr 1fr;
+  position:relative;overflow:hidden;
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:11rem 64px 16rem 64px;
+  position:relative;z-index:2;
+}
+.hero-eyebrow{
+  font-family:var(--sans);font-size:.68rem;font-weight:300;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--cream);
+  display:flex;align-items:center;gap:1rem;margin-bottom:2.2rem;
+}
+.hero-eyebrow::before{content:'';width:36px;height:1px;background:var(--cream)}
+.hero-h1{
+  font-family:var(--serif);
+  font-size:clamp(4.2rem,6vw,8.5rem);
+  font-weight:300;line-height:.92;
+  color:var(--cream);margin-bottom:24px;letter-spacing:-.018em;
+}
+.hero-h1 em{font-style:italic;color:var(--cream)}
+.hero-sub{
+  font-family:var(--sans);font-size:.95rem;font-weight:300;
+  color:rgba(248,241,231,.8);line-height:1.82;
+  max-width:440px;margin-bottom:4rem;
+}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-pri{
+  display:inline-flex;align-items:center;gap:.8rem;
+  font-family:var(--sans);font-size:.7rem;font-weight:400;
+  letter-spacing:.17em;text-transform:uppercase;
+  color:var(--terra);background:var(--cream);
+  border:1px solid var(--terra);padding:1.15rem 2.5rem;text-decoration:none;
+  transition:background .35s,color .35s,border-color .35s;
+}
+.btn-pri:hover{background:var(--dark);color:var(--cream);border-color:var(--dark)}
+.btn-pri svg{flex-shrink:0;transition:transform .3s}
+.btn-pri:hover svg{transform:translateX(4px)}
+.btn-out{
+  display:inline-flex;align-items:center;gap:.8rem;
+  font-family:var(--sans);font-size:.7rem;font-weight:400;
+  letter-spacing:.17em;text-transform:uppercase;
+  color:var(--cream);background:transparent;
+  border:1px solid rgba(248,241,231,.28);
+  padding:1.15rem 2.5rem;text-decoration:none;transition:border-color .35s;
+}
+.btn-out:hover{border-color:var(--cream)}
+
+/* divider between columns */
+.hero-divider{
+  position:absolute;top:0;left:50%;width:1px;height:100%;
+  background:rgba(148,87,61,.18);
+  pointer-events:none;
+}
+
+/* right visual column */
+.hero-right{position:relative;overflow:hidden}
+.hero-right-bg{position:absolute;inset:0;background:#7a4430}
+.hero-right-bg-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;opacity:1;filter:grayscale(1);
+  mix-blend-mode:luminosity;
+}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero-scan{
+  position:absolute;top:0;left:0;right:0;height:1px;
+  background:rgba(248,241,231,.15);
+  animation:scan 9s ease-in-out infinite;pointer-events:none;
+}
+@keyframes scan{0%{top:-1px;opacity:0}8%{opacity:1}92%{opacity:.6}100%{top:100%;opacity:0}}
+.hero-visual-caption{
+  position:absolute;bottom:9rem;left:3.5rem;
+  font-family:var(--serif);font-size:.85rem;font-style:italic;
+  color:rgba(248,241,231,.28);letter-spacing:.06em;z-index:2;
+}
+
+/* stat strip inside hero */
+.hero-stats{
+  position:absolute;bottom:0;left:0;right:0;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid rgba(20,10,9,.08);
+  background:var(--cream);
+  z-index:3;
+}
+.hero-stat{
+  padding:2.2rem 3.2rem;
+  border-right:1px solid rgba(20,10,9,.08);
+}
+.hero-stat:last-child{border-right:none}
+.hero-stat-num{
+  font-family:var(--serif);font-size:2.1rem;font-weight:300;
+  color:var(--terra);line-height:1;margin-bottom:calc(.3rem + 4px);
+}
+.hero-stat-label{
+  font-family:var(--sans);font-size:.68rem;font-weight:300;
+  letter-spacing:.13em;text-transform:uppercase;
+  color:rgba(20,10,9,.5);
+}
+
+/* scroll indicator */
+.hero-scroll{
+  position:absolute;right:3.5rem;bottom:7.5rem;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  font-family:var(--sans);font-size:.62rem;font-weight:300;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(248,241,231,.32);z-index:4;
+}
+.scroll-line{
+  width:1px;height:52px;background:var(--terra);
+  animation:spulse 2.2s infinite;
+}
+@keyframes spulse{0%,100%{opacity:.35;transform:scaleY(.8)}50%{opacity:1;transform:scaleY(1)}}
+
+/* ═══ TRUST STRIP ═══ */
+#trust{
+  background:var(--sage);overflow:hidden;
+  padding:.9rem 0;
+  border-bottom:1px solid rgba(248,241,231,.12);
+}
+.trust-track{display:flex;width:max-content;animation:marquee 52s linear infinite}
+.trust-track:hover{animation-play-state:paused}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.trust-item{
+  font-family:var(--sans);font-size:.62rem;font-weight:300;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--cream);padding:0 2.5rem;white-space:nowrap;
+}
+.trust-sep{
+  width:3px;height:3px;border-radius:50%;
+  background:var(--cream);opacity:.8;flex-shrink:0;align-self:center;
+}
+
+/* ═══ PHILOSOPHY ═══ */
+#philosophy{
+  background:var(--cream);color:var(--dark);
+  padding:var(--pad);
+}
+.phil-layout{
+  max-width:var(--max);margin:0 auto;
+  display:grid;grid-template-columns:1fr 1.15fr;
+  gap:calc(11rem - 64px);align-items:start;
+}
+.phil-h2{
+  font-family:var(--serif);
+  font-size:clamp(3.5rem,5.5vw,7.5rem);
+  font-weight:300;line-height:.91;
+  letter-spacing:-.025em;
+  position:sticky;top:9rem;
+}
+.phil-h2 em{font-style:italic;color:var(--terra)}
+.phil-right{padding-top:.5rem}
+.phil-lead{
+  font-family:var(--sans);font-size:1rem;font-weight:300;
+  color:rgba(20,10,9,.72);line-height:1.92;
+  margin-bottom:6rem;
+  border-left:2px solid var(--terra);
+  padding-left:2rem;
+}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.pillar{padding-top:2rem;border-top:1px solid rgba(20,10,9,.1)}
+.pillar-num{
+  font-family:var(--sans);font-size:.62rem;font-weight:400;
+  letter-spacing:.22em;color:var(--terra);margin-bottom:.6rem;
+}
+.pillar-title{
+  font-family:var(--serif);font-size:1.4rem;font-weight:500;
+  color:var(--dark);margin-bottom:.5rem;line-height:1.1;
+}
+.pillar-text{
+  font-family:var(--sans);font-size:.82rem;font-weight:300;
+  color:rgba(20,10,9,.7);line-height:1.75;
+}
+
+/* ═══ SERVICES ═══ */
+#services{
+  background:var(--sage);color:var(--dark);
+  padding:var(--pad);
+}
+.services-hd{
+  max-width:var(--max);margin:0 auto 7rem;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:3rem;
+}
+.services-h2{
+  font-family:var(--serif);
+  font-size:clamp(3.5rem,5.5vw,7.5rem);
+  font-weight:300;line-height:.91;letter-spacing:-.025em;
+  color:var(--cream);
+}
+.services-h2 em{font-style:italic;color:var(--cream)}
+.services-blurb{
+  font-family:var(--sans);font-size:.88rem;font-weight:300;
+  color:var(--cream);line-height:1.75;
+  max-width:420px;text-align:right;align-self:flex-end;
+}
+.services-grid{
+  max-width:var(--max);margin:0 auto;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+.svc-card{
+  background:#869292;
+  border:1px solid rgba(248,241,231,.12);
+  border-radius:4px;
+  box-shadow:0 1px 4px rgba(0,0,0,.07);
+  padding:2.8rem 2.8rem 5rem;
+  position:relative;overflow:hidden;
+  transition:background .5s cubic-bezier(.22,1,.36,1),
+             border-color .5s cubic-bezier(.22,1,.36,1),
+             transform .5s cubic-bezier(.22,1,.36,1),
+             box-shadow .5s cubic-bezier(.22,1,.36,1);
+}
+/* terracotta underline sweep */
+.svc-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:var(--cream);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .55s cubic-bezier(.22,1,.36,1);
+}
+.svc-card:hover{
+  background:#798585;
+  border-color:rgba(248,241,231,.22);
+  transform:translateY(-3px);
+  box-shadow:0 4px 12px rgba(0,0,0,.09);
+}
+.svc-card:hover::after{transform:scaleX(1)}
+.svc-num{
+  font-family:var(--sans);font-size:.62rem;font-weight:400;
+  letter-spacing:.22em;color:var(--cream);margin-bottom:1.8rem;
+}
+.svc-title{
+  font-family:var(--serif);font-size:2.4rem;font-weight:400;
+  color:var(--cream);line-height:.98;margin-bottom:1.8rem;
+  letter-spacing:-.015em;
+}
+.svc-tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.8rem}
+.svc-tag{
+  font-family:var(--sans);font-size:.68rem;font-weight:300;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(248,241,231,.85);
+  border:1px solid rgba(248,241,231,.25);
+  padding:.28rem .7rem;border-radius:2px;
+}
+.svc-desc{
+  font-family:var(--sans);font-size:.75rem;font-weight:300;
+  color:rgba(248,241,231,.78);line-height:1.78;
+  font-style:italic;
+}
+.svc-arrow{
+  position:absolute;bottom:2.8rem;right:2.8rem;
+  width:28px;height:28px;
+  border:1px solid rgba(248,241,231,.2);
+  border-radius:2px;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .45s cubic-bezier(.22,1,.36,1);
+}
+.svc-arrow svg{
+  stroke:var(--cream);
+  transition:transform .45s cubic-bezier(.22,1,.36,1);
+}
+.svc-card:hover .svc-arrow svg{transform:translateX(4px)}
+
+/* ═══ SERVICE DETAIL PANEL ═══ */
+.svc-detail{
+  max-height:0;overflow:hidden;
+  opacity:0;
+  transition:max-height .65s cubic-bezier(.22,1,.36,1),opacity .45s ease;
+  max-width:var(--max);margin:10px auto 0;
+  position:relative;
+}
+.svc-detail.open{max-height:800px;opacity:1}
+.svc-detail-inner{
+  background:#869292;
+  border:1px solid rgba(248,241,231,.12);
+  border-radius:4px;
+  display:grid;grid-template-columns:1.1fr 1fr .9fr;
+  gap:5rem;padding:2.8rem 2.8rem 3.5rem;
+  position:relative;
+}
+.svc-detail-close{
+  position:absolute;top:1.2rem;right:1.4rem;
+  background:none;border:none;
+  font-size:1.2rem;line-height:1;
+  color:rgba(248,241,231,.5);cursor:pointer;
+  padding:.2rem;
+  transition:color .3s;
+}
+.svc-detail-close:hover{color:var(--cream)}
+.svc-detail-num{
+  font-family:var(--sans);font-size:.62rem;font-weight:400;
+  letter-spacing:.22em;color:var(--cream);margin-bottom:1rem;
+}
+.svc-detail-title{
+  font-family:var(--serif);font-size:2.2rem;font-weight:300;
+  color:var(--cream);line-height:.96;letter-spacing:-.015em;font-weight:500;
+  margin-bottom:1.4rem;
+}
+.svc-detail-desc{
+  font-family:var(--sans);font-size:.84rem;font-weight:300;
+  color:rgba(248,241,231,.78);line-height:1.82;
+}
+.svc-detail-label{
+  font-family:var(--sans);font-size:.62rem;font-weight:400;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--cream);margin-bottom:1.4rem;
+  padding-bottom:.8rem;border-bottom:1px solid rgba(248,241,231,.25);
+}
+.svc-detail-list{
+  list-style:none;display:flex;flex-direction:column;gap:.6rem;
+}
+.svc-detail-list li{
+  font-family:var(--sans);font-size:.82rem;font-weight:300;
+  color:rgba(248,241,231,.85);
+  display:flex;align-items:baseline;gap:.7rem;
+}
+.svc-detail-list li::before{
+  content:'';width:4px;height:4px;border-radius:50%;
+  background:var(--cream);flex-shrink:0;margin-top:.35rem;
+}
+.svc-detail-note{
+  font-family:var(--serif);font-size:.9rem;font-weight:300;
+  font-style:italic;color:var(--cream);
+  line-height:1.72;margin-bottom:2rem;
+  padding-bottom:2rem;border-bottom:1px solid rgba(248,241,231,.15);
+}
+.svc-detail-cta{
+  margin-bottom:0;display:inline-flex;
+  background:#798585;color:var(--cream);
+}
+.svc-detail-cta:hover{background:#6b7777}
+@media(max-width:1024px){
+  .svc-detail-inner{grid-template-columns:1fr 1fr;gap:3rem}
+  .svc-detail-right{grid-column:span 2}
+}
+@media(max-width:640px){
+  .svc-detail-inner{grid-template-columns:1fr;gap:2rem}
+  .svc-detail-right{grid-column:auto}
+  .svc-detail.open{max-height:none}
+}
+
+/* ═══ SCIENCE ═══ */
+#science{
+  background:var(--dark);color:var(--cream);
+  padding:var(--pad);display:none;
+}
+.science-layout{
+  max-width:var(--max);margin:0 auto;
+  display:grid;grid-template-columns:1fr 1.5fr;
+  gap:11rem;align-items:start;
+}
+.science-h2{
+  font-family:var(--serif);
+  font-size:clamp(3.5rem,5.5vw,7.5rem);
+  font-weight:300;line-height:.91;margin-bottom:2.2rem;
+  letter-spacing:-.025em;
+}
+.science-h2 em{font-style:italic;color:var(--terra)}
+.science-lead{
+  font-family:var(--sans);font-size:.9rem;font-weight:300;
+  color:rgba(248,241,231,.72);line-height:1.88;margin-bottom:3.5rem;
+}
+.sci-table{border-top:1px solid rgba(248,241,231,.1)}
+.sci-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:.9rem 0;border-bottom:1px solid rgba(248,241,231,.07);gap:1rem;
+}
+.sci-lbl{
+  font-family:var(--sans);font-size:.6rem;font-weight:400;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(248,241,231,.25);flex-shrink:0;
+}
+.sci-val{
+  font-family:var(--sans);font-size:.78rem;font-weight:300;
+  color:rgba(248,241,231,.55);text-align:right;
+}
+.tech-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+}
+.tech-card{
+  background:rgba(248,241,231,.03);
+  border:1px solid rgba(248,241,231,.06);
+  padding:2.8rem 2.5rem;
+  transition:background .5s;
+}
+.tech-card:hover{background:rgba(248,241,231,.07)}
+.tech-num{
+  font-family:var(--sans);font-size:.58rem;font-weight:400;
+  letter-spacing:.16em;color:var(--terra);margin-bottom:.7rem;
+}
+.tech-name{
+  font-family:var(--serif);font-size:1.3rem;font-weight:400;
+  color:var(--cream);margin-bottom:.4rem;line-height:1.1;
+}
+.tech-desc{
+  font-family:var(--sans);font-size:.76rem;font-weight:300;
+  color:rgba(248,241,231,.68);line-height:1.65;margin-bottom:.9rem;
+}
+.tech-badge{
+  font-family:var(--sans);font-size:.58rem;font-weight:400;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(248,241,231,.32);
+  border:1px solid rgba(248,241,231,.12);
+  padding:.18rem .55rem;display:inline-block;
+}
+
+/* ═══ PROCESS ═══ */
+#process{
+  background:var(--cream);color:var(--dark);
+  padding:var(--pad);
+}
+.process-wrap{max-width:var(--max);margin:0 auto}
+.process-hd{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:10rem;margin-bottom:64px;align-items:end;
+}
+.process-h2{
+  font-family:var(--serif);
+  font-size:clamp(3.5rem,5.5vw,7.5rem);
+  font-weight:300;line-height:.91;
+  letter-spacing:-.025em;
+}
+.process-h2 em{font-style:italic;color:var(--terra)}
+.process-desc{
+  font-family:var(--sans);font-size:.92rem;font-weight:300;
+  color:rgba(20,10,9,.72);line-height:1.88;
+}
+.steps{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:4rem;position:relative;
+}
+.steps::before{
+  content:'';position:absolute;top:5px;left:0;right:0;
+  height:1px;background:rgba(20,10,9,.1);
+}
+.step{position:relative;z-index:1}
+.step-dot{
+  width:10px;height:10px;
+  background:var(--cream);border:2px solid var(--terra);
+  border-radius:50%;margin-bottom:3.5rem;transition:background .3s;
+  flex-shrink:0;
+}
+.step:hover .step-dot{background:var(--terra)}
+.step-num{
+  font-family:var(--sans);font-size:.62rem;font-weight:400;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--terra);margin-bottom:.8rem;
+}
+.step-title{
+  font-family:var(--serif);font-size:1.65rem;font-weight:500;
+  color:var(--dark);margin-bottom:.75rem;line-height:1.08;
+}
+.step-desc{
+  font-family:var(--sans);font-size:.82rem;font-weight:300;
+  color:rgba(20,10,9,.72);line-height:1.75;
+}
+.process-ft{
+  margin-top:64px;padding-top:4rem;
+  border-top:1px solid rgba(20,10,9,.1);
+  display:flex;justify-content:space-between;align-items:center;gap:2rem;
+}
+.process-ft-text{
+  font-family:var(--serif);font-size:1.7rem;font-weight:300;
+  color:var(--dark);line-height:1.28;
+}
+.process-ft-text em{font-style:italic;color:var(--terra)}
+
+/* ═══ TEAM ═══ */
+#team{
+  background:var(--golden);color:var(--cream);
+  padding:var(--pad);
+}
+.team-layout{
+  max-width:var(--max);margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:7rem;align-items:start;
+}
+.team-left{}
+.team-eyebrow{
+  font-family:var(--sans);font-size:.67rem;font-weight:400;
+  letter-spacing:.24em;text-transform:uppercase;
+  color:var(--cream);
+  display:flex;align-items:center;gap:1.2rem;margin-bottom:2.8rem;
+}
+.team-eyebrow::before{content:'';width:30px;height:1px;background:var(--cream);opacity:.6;flex-shrink:0}
+.team-h2{
+  font-family:var(--serif);
+  font-size:clamp(3.5rem,5.5vw,7.5rem);
+  font-weight:300;line-height:.91;
+  letter-spacing:-.025em;color:var(--cream);
+  margin-bottom:2.5rem;
+}
+.team-intro{
+  font-family:var(--sans);font-size:.92rem;font-weight:300;
+  color:var(--cream);line-height:1.88;
+}
+.team-right{}
+.clin-card{
+  background:#f8f1e7;
+  padding:3rem 3rem 2.5rem;
+}
+.clin-name{
+  font-family:var(--serif);font-size:2rem;font-weight:400;
+  color:var(--dark);line-height:1.02;margin-bottom:.4rem;
+}
+.clin-role{
+  font-family:var(--sans);font-size:.62rem;font-weight:400;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--terra);margin-bottom:1.6rem;
+}
+.clin-oneliner{
+  font-family:var(--serif);font-size:1rem;font-weight:300;
+  font-style:italic;color:rgba(20,10,9,.65);
+  line-height:1.55;margin-bottom:1.8rem;
+  padding-bottom:1.8rem;
+  border-bottom:1px solid rgba(20,10,9,.1);
+}
+.clin-bio{
+  font-family:var(--sans);font-size:.82rem;font-weight:300;
+  color:rgba(20,10,9,.52);line-height:1.85;
+  margin-bottom:2rem;
+}
+.clin-creds{display:flex;flex-direction:column;gap:.55rem;margin-bottom:2.2rem}
+.cred{
+  font-family:var(--sans);font-size:.65rem;font-weight:300;
+  letter-spacing:.06em;
+  color:rgba(20,10,9,.6);
+  border:1px solid rgba(20,10,9,.15);
+  padding:.38rem .9rem;display:inline-block;align-self:flex-start;
+  background:transparent;
+}
+.clin-footer{
+  padding-top:1.5rem;
+  border-top:1px solid rgba(20,10,9,.1);
+}
+.clin-footer-note{
+  font-family:var(--sans);font-size:.72rem;font-weight:300;
+  color:rgba(20,10,9,.35);line-height:1.65;font-style:italic;
+}
+.certs-wrap{
+  max-width:var(--max);margin:5rem auto 0;
+  padding-top:4rem;
+  border-top:1px solid var(--cream);
+}
+.certs-eyebrow{
+  font-family:var(--sans);font-size:.67rem;font-weight:400;
+  letter-spacing:.24em;text-transform:uppercase;
+  color:var(--cream);margin-bottom:2.5rem;
+}
+.certs-grid{
+  display:grid;grid-template-columns:repeat(8,1fr);
+  gap:1.5rem;align-items:center;
+}
+.cert-item{
+  display:flex;align-items:center;justify-content:center;
+}
+.cert-item{cursor:pointer}
+.cert-item img{
+  width:100%;max-width:100px;height:auto;
+  object-fit:contain;
+  border:6px solid var(--cream);
+  opacity:1;
+  transition:opacity .3s,transform .3s;
+}
+.cert-item:hover img{opacity:.8;transform:scale(1.05)}
+@media(max-width:1024px){.certs-grid{grid-template-columns:repeat(4,1fr);gap:1.2rem}}
+@media(max-width:640px){.certs-grid{grid-template-columns:repeat(2,1fr);gap:1rem}}
+
+/* Lightbox */
+.lightbox{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(20,10,9,.92);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .35s ease;
+}
+.lightbox.active{opacity:1;pointer-events:all}
+.lightbox-img{
+  max-width:90vw;max-height:88vh;
+  object-fit:contain;
+  border:6px solid var(--cream);
+  transform:scale(.94);
+  transition:transform .35s cubic-bezier(.22,1,.36,1);
+}
+.lightbox.active .lightbox-img{transform:scale(1)}
+.lightbox-close{
+  position:absolute;top:2rem;right:2rem;
+  background:none;border:1px solid rgba(248,241,231,.25);
+  color:var(--cream);font-family:var(--sans);
+  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  padding:.6rem 1.2rem;cursor:pointer;
+  transition:border-color .3s,color .3s;
+}
+.lightbox-close:hover{border-color:var(--cream);color:var(--cream)}
+.lightbox-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:none;border:1px solid rgba(248,241,231,.25);
+  color:var(--cream);font-size:1.2rem;
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:border-color .3s;
+}
+.lightbox-nav:hover{border-color:var(--cream)}
+.lightbox-prev{left:2rem}
+.lightbox-next{right:2rem}
+@media(max-width:640px){
+  .lightbox-img{max-width:95vw;max-height:80vh}
+  .lightbox-prev{left:.75rem}
+  .lightbox-next{right:.75rem}
+  .lightbox-close{top:1rem;right:1rem}
+}
+
+/* ═══ OUTCOMES ═══ */
+#outcomes{
+  background:var(--terra);color:var(--cream);
+  padding:var(--pad);
+}
+.outcomes-hd{
+  max-width:var(--max);margin:0 auto 2.5rem;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:8rem;align-items:end;
+}
+.outcomes-h2{
+  font-family:var(--serif);
+  font-size:clamp(3.5rem,5.5vw,7.5rem);
+  font-weight:300;line-height:.91;
+  letter-spacing:-.025em;
+}
+.outcomes-h2 em{font-style:italic}
+.outcomes-sub{
+  font-family:var(--sans);font-size:.9rem;font-weight:300;
+  color:rgba(248,241,231,.75);line-height:1.85;
+}
+.outcomes-grid{
+  max-width:var(--max);margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid rgba(248,241,231,.2);
+}
+.outcome{
+  padding:5rem 3.5rem 5rem 0;
+  border-right:1px solid rgba(248,241,231,.12);
+}
+.outcome:not(:first-child){padding-left:3.5rem}
+.outcome:last-child{border-right:none}
+.outcome-num{
+  font-family:var(--serif);
+  font-size:clamp(3.5rem,4.5vw,5.8rem);
+  font-weight:300;line-height:1;
+  color:var(--cream);margin-bottom:.8rem;letter-spacing:-.02em;
+}
+.outcome-label{
+  font-family:var(--sans);font-size:.84rem;font-weight:300;
+  color:rgba(248,241,231,.78);line-height:1.55;margin-bottom:.6rem;
+}
+.outcome-src{
+  font-family:var(--sans);font-size:.58rem;font-weight:300;
+  letter-spacing:.04em;color:rgba(248,241,231,.37);line-height:1.5;
+}
+.outcomes-fn{
+  max-width:var(--max);margin:2.5rem auto 0;
+  padding-top:1.5rem;border-top:1px solid rgba(248,241,231,.14);
+  font-family:var(--sans);font-size:.6rem;
+  color:rgba(248,241,231,.68);letter-spacing:.04em;line-height:1.65;
+}
+
+/* ═══ INSIGHTS ═══ */
+#insights{
+  background:var(--cream);color:var(--dark);
+  padding:var(--pad);
+}
+.insights-hd{
+  max-width:var(--max);margin:0 auto 6rem;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;
+}
+.insights-h2{
+  font-family:var(--serif);
+  font-size:clamp(3.5rem,5.5vw,7.5rem);
+  font-weight:300;line-height:.91;
+  letter-spacing:-.025em;
+}
+.insights-h2 em{font-style:italic;color:var(--terra)}
+.view-all{
+  font-family:var(--sans);font-size:.7rem;font-weight:400;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--terra);text-decoration:none;
+  display:flex;align-items:center;gap:.5rem;
+  transition:gap .3s;flex-shrink:0;align-self:flex-end;
+}
+.view-all:hover{gap:1rem}
+.insights-grid{
+  max-width:var(--max);margin:0 auto;
+  display:grid;grid-template-columns:2.1fr 1fr 1fr;
+  gap:2px;
+}
+.ins-card{
+  background:var(--sage);overflow:hidden;
+  display:flex;flex-direction:column;transition:background .5s;
+}
+.ins-card:hover{background:#8a9696}
+.ins-card-feat{grid-row:span 2}
+.ins-thumb{overflow:hidden;flex-shrink:0}
+.ins-thumb img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  opacity:1;
+  transition:transform .9s ease;
+}
+.ins-card:hover .ins-thumb img{
+  transform:scale(1.04);
+}
+.ins-card-feat .ins-thumb{aspect-ratio:3/4}
+.ins-card:not(.ins-card-feat) .ins-thumb{aspect-ratio:16/9}
+.ins-body{padding:2.2rem 2.2rem 3rem;flex:1}
+.ins-cat{
+  font-family:var(--sans);font-size:.62rem;font-weight:400;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--cream);margin-bottom:calc(.6rem + 16px);
+}
+.ins-title{
+  font-family:var(--serif);font-size:1.35rem;font-weight:400;
+  color:var(--cream);line-height:1.28;margin-bottom:.5rem;
+}
+.ins-card-feat .ins-title{font-size:1.85rem}
+.ins-excerpt{
+  font-family:var(--sans);font-size:.78rem;font-weight:300;
+  color:var(--cream);line-height:1.72;margin-bottom:calc(.85rem + 16px);
+}
+.ins-meta{
+  font-family:var(--sans);font-size:.65rem;font-weight:300;
+  color:rgba(248,241,231,.51);
+}
+
+/* ═══ TESTIMONIALS ═══ */
+#testimonials{
+  background:var(--golden);color:var(--cream);
+  padding:var(--pad);
+}
+.testi-hd{
+  max-width:var(--max);margin:0 auto 64px;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:8rem;align-items:end;
+}
+.testi-h2{
+  font-family:var(--serif);
+  font-size:clamp(3.5rem,5.5vw,7.5rem);
+  font-weight:300;line-height:.91;letter-spacing:-.025em;
+}
+.testi-h2 em{font-style:italic;color:var(--cream)}
+.testi-sub{
+  font-family:var(--sans);font-size:.9rem;font-weight:300;
+  color:rgba(248,241,231,.72);line-height:1.85;
+}
+.testi-grid{
+  max-width:var(--max);margin:0 auto;
+  display:grid;grid-template-columns:repeat(3,1fr);
+}
+.testi{
+  padding:4.5rem 4.5rem 4.5rem 0;
+  border-right:1px solid rgba(248,241,231,.25);
+}
+.testi:last-child{border-right:none;padding-right:0}
+.testi:not(:first-child){padding-left:4.5rem}
+.q-icon{
+  font-family:var(--serif);font-size:5rem;font-weight:600;
+  color:var(--cream);line-height:.4;margin-bottom:1.6rem;opacity:.55;
+}
+.q-body{
+  font-family:var(--serif);font-size:1.08rem;font-weight:300;
+  font-style:italic;color:var(--cream);line-height:1.75;margin-bottom:2.2rem;
+}
+.q-name{
+  font-family:var(--sans);font-size:.68rem;font-weight:400;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--cream);margin-bottom:calc(.2rem + 2px);
+}
+.q-detail{
+  font-family:var(--sans);font-size:.68rem;font-weight:300;
+  color:rgba(248,241,231,.53);
+}
+.testi-bar{
+  max-width:var(--max);margin:64px auto 0;
+  padding-top:3rem;border-top:1px solid rgba(248,241,231,.25);
+  display:flex;justify-content:space-between;align-items:center;
+  gap:2rem;flex-wrap:wrap;
+}
+.stars{display:flex;gap:.3rem}
+.star{color:var(--cream);font-size:.85rem}
+.rating-lbl{
+  font-family:var(--sans);font-size:.78rem;font-weight:300;
+  color:rgba(248,241,231,.72);
+}
+
+/* ═══ BOOKING ═══ */
+#booking{
+  background:var(--cream);color:var(--dark);
+  padding:var(--pad);
+}
+.booking-layout{
+  max-width:var(--max);margin:0 auto;
+  display:grid;grid-template-columns:1.15fr .85fr;
+  gap:11rem;align-items:start;
+}
+.booking-h2{
+  font-family:var(--serif);
+  font-size:clamp(3.5rem,5.5vw,7.5rem);
+  font-weight:300;line-height:.9;color:var(--dark);
+  margin-bottom:2.5rem;letter-spacing:-.025em;
+}
+.booking-h2 em{font-style:italic;color:var(--terra)}
+.booking-sub{
+  font-family:var(--sans);font-size:.97rem;font-weight:300;
+  color:rgba(20,10,9,.72);line-height:1.88;
+  margin-bottom:4.5rem;max-width:490px;
+}
+.assurances{display:flex;flex-direction:column;gap:1rem;margin-bottom:5rem}
+.assurance{
+  font-family:var(--sans);font-size:.84rem;font-weight:300;
+  color:rgba(20,10,9,.72);line-height:1.5;
+  display:flex;align-items:baseline;gap:.85rem;
+}
+.assurance::before{
+  content:'—';color:var(--terra);
+  font-family:var(--serif);font-size:1rem;flex-shrink:0;
+}
+.form-wrap{
+  background:var(--terra);padding:4.5rem 4rem;
+  display:flex;flex-direction:column;gap:1.6rem;
+  position:sticky;top:9rem;
+}
+.form-title{
+  font-family:var(--serif);font-size:1.55rem;font-weight:400;
+  color:var(--cream);margin-bottom:.4rem;
+}
+.f-field{display:flex;flex-direction:column;gap:.35rem}
+.f-label{
+  font-family:var(--sans);font-size:.63rem;font-weight:400;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(248,241,231,.83);
+}
+.f-input,.f-area,.f-select{
+  background:rgba(248,241,231,.04);
+  border:1px solid rgba(248,241,231,.1);
+  color:var(--cream);padding:.9rem 1rem;
+  font-family:var(--sans);font-size:.88rem;font-weight:300;
+  outline:none;transition:border-color .3s;
+  -webkit-appearance:none;width:100%;
+}
+.f-input:focus,.f-area:focus,.f-select:focus{border-color:var(--terra)}
+.f-input::placeholder,.f-area::placeholder{color:rgba(248,241,231,.3)}
+.f-area{resize:none}
+.f-select-wrap{position:relative;display:block}
+.f-select-wrap::before{
+  content:'';position:absolute;right:1rem;top:50%;transform:translateY(-50%);
+  width:0;height:0;
+  border-left:4px solid transparent;
+  border-right:4px solid transparent;
+  border-top:5px solid rgba(248,241,231,.6);
+  pointer-events:none;z-index:1;
+}
+.f-select{color:rgba(248,241,231,.2);cursor:pointer;padding-right:2.5rem}
+.f-select.selected{color:rgba(248,241,231,.88)}
+.f-select option,.f-select optgroup{background:#94573d;color:#f8f1e7}
+.f-select option:hover{background:#ffffff!important;color:#94573d!important}
+.f-select option:checked{background:#7a4430;color:#f8f1e7}
+.f-submit{
+  background:var(--cream);color:var(--terra);border:none;
+  padding:1.25rem 2rem;width:100%;
+  font-family:var(--sans);font-size:.7rem;font-weight:400;
+  letter-spacing:.2em;text-transform:uppercase;
+  transition:background .4s,color .4s;margin-top:.5rem;cursor:pointer;
+}
+.f-submit:hover{background:var(--dark);color:var(--cream)}
+.f-note{
+  font-family:var(--sans);font-size:.66rem;font-weight:300;
+  color:rgba(248,241,231,.22);line-height:1.65;
+  border-top:1px solid rgba(248,241,231,.07);padding-top:1rem;
+}
+
+/* ═══ FOOTER ═══ */
+footer{
+  background:var(--terra);color:var(--cream);
+  padding:40px 64px 40px;
+  border-top:1px solid rgba(248,241,231,.08);
+}
+.footer-grid{
+  max-width:var(--max);margin:0 auto;
+  display:grid;grid-template-columns:1.9fr 1fr 1fr 1fr 1fr;
+  gap:4rem;margin-bottom:3rem;align-items:start;
+}
+.f-logo{display:block;margin-bottom:0}
+.f-logo-img{height:120px;width:auto;display:block}
+.f-tagline{
+  font-family:var(--sans);font-size:.82rem;font-weight:300;
+  color:rgba(248,241,231,.85);line-height:1.75;
+  max-width:240px;margin-bottom:2.5rem;
+}
+.f-social{display:flex;gap:.8rem}
+.soc{
+  width:34px;height:34px;
+  border:1px solid rgba(248,241,231,.25);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(248,241,231,.6);text-decoration:none;
+  font-size:.65rem;font-family:var(--sans);
+  transition:all .3s;
+}
+.soc:hover{border-color:var(--cream);color:var(--cream)}
+.footer-grid > div:not(:first-child){padding-top:40px}
+.f-col-title{
+  font-family:var(--sans);font-size:.62rem;font-weight:400;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--cream);margin-bottom:1.6rem;
+}
+.f-nav{list-style:none;display:flex;flex-direction:column;gap:.68rem}
+.f-nav a{
+  font-family:var(--sans);font-size:.8rem;font-weight:300;
+  color:rgba(248,241,231,.75);text-decoration:none;
+  transition:color .35s;
+}
+.f-nav a:hover{color:var(--cream)}
+.footer-bottom{
+  max-width:var(--max);margin:0 auto;
+  padding-top:2rem;border-top:1px solid rgba(248,241,231,.15);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:1rem;
+}
+.f-legal{
+  font-family:var(--sans);font-size:.68rem;font-weight:300;
+  color:rgba(248,241,231,.45);
+}
+.f-legal a{color:var(--cream);text-decoration:none}
+
+/* ═══ REVEAL ═══ */
+.reveal,.reveal-l,.reveal-r{
+  opacity:0;
+  transition:opacity 1.05s cubic-bezier(.25,.46,.45,.94),transform 1.05s cubic-bezier(.25,.46,.45,.94);
+}
+.reveal{transform:translateY(22px)}
+.reveal-l{transform:translateX(-22px)}
+.reveal-r{transform:translateX(22px)}
+.reveal.vis,.reveal-l.vis,.reveal-r.vis{opacity:1;transform:none}
+.d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}.d4{transition-delay:.48s}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1280px){
+  :root{--pad:80px 64px;--max:1200px}
+  .science-layout{gap:7rem}
+  .booking-layout{gap:7rem}
+  .phil-layout{gap:7rem}
+}
+@media(max-width:1024px){
+  :root{--pad:80px 64px}
+  nav{height:80px;padding:0 40px}
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  #hero{grid-template-columns:1fr}
+  .hero-left{padding:8rem 64px 4rem}
+  .hero-right{height:55vw;min-height:320px}
+  .hero-stats{grid-template-columns:repeat(3,1fr)}
+  .hero-divider{display:none}
+  .hero-scroll{display:none}
+  .phil-layout{grid-template-columns:1fr;gap:4rem}
+  .phil-h2{position:static}
+  .pillars{grid-template-columns:1fr 1fr}
+  .services-hd{flex-direction:column;align-items:flex-start;gap:1.2rem}
+  .services-blurb{text-align:left;max-width:100%}
+  .services-grid{grid-template-columns:1fr}
+  .science-layout{grid-template-columns:1fr;gap:4rem}
+  .tech-grid{grid-template-columns:1fr 1fr}
+  .process-hd{grid-template-columns:1fr;gap:2rem;margin-bottom:5rem}
+  .steps{grid-template-columns:1fr 1fr;gap:3rem}
+  .steps::before{display:none}
+  .team-layout{grid-template-columns:1fr;gap:3rem}
+  .outcomes-hd{grid-template-columns:1fr;gap:2rem}
+  .outcomes-grid{grid-template-columns:1fr 1fr}
+  .insights-hd{flex-direction:column;align-items:flex-start;gap:1.2rem}
+  .insights-grid{grid-template-columns:1fr}
+  .ins-card-feat{grid-row:auto}
+  .ins-card-feat .ins-thumb{aspect-ratio:16/9}
+  .testi-hd{grid-template-columns:1fr;gap:2rem}
+  .testi-grid{grid-template-columns:1fr}
+  .testi{border-right:none;border-bottom:1px solid rgba(248,241,231,.07);padding:2.5rem 0!important}
+  .booking-layout{grid-template-columns:1fr;gap:4rem}
+  .form-wrap{position:static}
+  footer{padding:48px 64px 32px}
+  .footer-grid{grid-template-columns:1fr 1fr 1fr;gap:2.5rem}
+}
+@media(max-width:640px){
+  :root{--pad:80px 64px}
+  nav{height:80px;padding:0 40px}
+  .hero-inner{padding:0 1.6rem 5rem}
+  .pillars{grid-template-columns:1fr}
+  .tech-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .outcomes-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  footer{padding:40px 64px 24px}
+}
+
+</style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav id="navbar">
+  <a href="#" class="nav-logo"><img src="Logo.png" alt="Bare Clinic" class="logo-img"></a>
+  <ul class="nav-links">
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#services">Treatments</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#insights">Insights</a></li>
+  </ul>
+  <a href="#booking" class="nav-cta">Book Now</a>
+  <button class="hamburger" id="menuToggle" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile nav -->
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" id="mobClose">Close</button>
+  <a href="#philosophy" class="mob-link">Philosophy</a>
+  <a href="#services" class="mob-link">Treatments</a>
+  <a href="#process" class="mob-link">Process</a>
+  <a href="#insights" class="mob-link">Insights</a>
+  <a href="#booking" class="mob-link" style="color:var(--terra)">Book Consultation</a>
+</div>
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <div class="hero-divider"></div>
+
+  <!-- Left -->
+  <div class="hero-left">
+    <div class="hero-eyebrow reveal">Regenerative Aesthetics</div>
+    <h1 class="hero-h1 reveal d1">
+      Regenerative<br>
+      Care for<br>
+      <em>Real Skin.</em>
+    </h1>
+    <p class="hero-sub reveal d2">
+      Most clinics treat what they see. We start with what they don't. Physician-led, biology-first aesthetic care that works with your skin - never against it.
+    </p>
+    <div class="hero-btns reveal d3">
+      <a href="#booking" class="btn-pri">
+        Book Consultation
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      <a href="#services" class="btn-out">Explore Treatments</a>
+    </div>
+  </div>
+
+  <!-- Right visual -->
+  <div class="hero-right">
+    <div class="hero-right-bg"></div>
+    <img class="hero-right-bg-img"
+      src="Hero section image.jpg"
+      alt="" aria-hidden="true" loading="eager">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-scan"></div>
+    <p class="hero-visual-caption">Skin Intelligence, Refined.</p>
+  </div>
+
+  <!-- Stat strip -->
+  <div class="hero-stats">
+    <div class="hero-stat reveal">
+      <div class="hero-stat-num">98%</div>
+      <div class="hero-stat-label">Client Satisfaction</div>
+    </div>
+    <div class="hero-stat reveal d1">
+      <div class="hero-stat-num">14+</div>
+      <div class="hero-stat-label">Years Combined Expertise</div>
+    </div>
+    <div class="hero-stat reveal d2">
+      <div class="hero-stat-num">3K+</div>
+      <div class="hero-stat-label">Treatments Completed</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════ TRUST STRIP ══════════ -->
+<div id="trust" aria-hidden="true">
+  <div class="trust-track">
+    <span class="trust-item">GMC Registered</span><span class="trust-sep"></span>
+    <span class="trust-item">JCCP Practitioner</span><span class="trust-sep"></span>
+    <span class="trust-item">CQC Regulated</span><span class="trust-sep"></span>
+    <span class="trust-item">British College of Aesthetic Medicine</span><span class="trust-sep"></span>
+    <span class="trust-item">Harley Street Standards</span><span class="trust-sep"></span>
+    <span class="trust-item">Aesthetic Medicine Society</span><span class="trust-sep"></span>
+    <span class="trust-item">BCAM Member</span><span class="trust-sep"></span>
+    <span class="trust-item">Peer-Reviewed Protocols</span><span class="trust-sep"></span>
+    <span class="trust-item">GMC Registered</span><span class="trust-sep"></span>
+    <span class="trust-item">JCCP Practitioner</span><span class="trust-sep"></span>
+    <span class="trust-item">CQC Regulated</span><span class="trust-sep"></span>
+    <span class="trust-item">British College of Aesthetic Medicine</span><span class="trust-sep"></span>
+    <span class="trust-item">Harley Street Standards</span><span class="trust-sep"></span>
+    <span class="trust-item">Aesthetic Medicine Society</span><span class="trust-sep"></span>
+    <span class="trust-item">BCAM Member</span><span class="trust-sep"></span>
+    <span class="trust-item">Peer-Reviewed Protocols</span><span class="trust-sep"></span>
+  </div>
+</div>
+
+<!-- ══════════ PHILOSOPHY ══════════ -->
+<section id="philosophy">
+  <div class="phil-layout">
+    <div>
+      <div class="eyebrow reveal" style="color:var(--terra)">The Bare Approach</div>
+      <h2 class="phil-h2 reveal d1">
+        Skin health<br>over quick<br><em>fixes.</em>
+      </h2>
+    </div>
+    <div class="phil-right">
+      <p class="phil-lead reveal d2">
+        We believe lasting skin transformation begins with understanding your biology. Every protocol at Bare Clinic is built from clinical evidence, personalised to your unique skin profile, and designed to work with your body - not against it.
+      </p>
+      <div class="pillars">
+        <div class="pillar reveal">
+          <div class="pillar-num">01</div>
+          <div class="pillar-title">Long-Term Focus</div>
+          <p class="pillar-text">We engineer outcomes that compound over time - not temporary results that fade before your next appointment.</p>
+        </div>
+        <div class="pillar reveal d1">
+          <div class="pillar-num">02</div>
+          <div class="pillar-title">Natural Outcomes</div>
+          <p class="pillar-text">Enhancement should be invisible. Our goal is for you to look like your best self - rested, vital, and wholly natural.</p>
+        </div>
+        <div class="pillar reveal d2">
+          <div class="pillar-num">03</div>
+          <div class="pillar-title">Medical Precision</div>
+          <p class="pillar-text">Every decision is grounded in dermatological science. Intuition informed by data. Art guided by anatomy.</p>
+        </div>
+        <div class="pillar reveal d3">
+          <div class="pillar-num">04</div>
+          <div class="pillar-title">Patient-First</div>
+          <p class="pillar-text">We decline to treat what your skin doesn't need. Honesty is the first step toward trust, and trust is the foundation of every result.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SERVICES ══════════ -->
+<section id="services">
+  <div class="services-hd reveal">
+    <div>
+      <div class="eyebrow" style="color:var(--cream)">What We Offer</div>
+      <h2 class="services-h2">Our<br><em>Treatments</em></h2>
+    </div>
+    <p class="services-blurb">Every treatment is selected and customised to your<br>skin's unique needs - never off-the-shelf.</p>
+  </div>
+  <div class="services-grid">
+
+    <div class="svc-card reveal">
+      <div class="svc-num">01</div>
+      <h3 class="svc-title">Regenerative<br>Injectables</h3>
+      <div class="svc-tags">
+        <span class="svc-tag">Neuromodulators (Botox / Dysport)</span>
+        <span class="svc-tag">Dermal Fillers</span>
+        <span class="svc-tag">Skin Boosters</span>
+        <span class="svc-tag">Profhilo</span>
+        <span class="svc-tag">Mesotherapy</span>
+      </div>
+      <p class="svc-desc">"Refined injectable and regenerative treatments designed to soften, restore, and support facial harmony while preserving natural movement and expression."</p>
+      <div class="svc-arrow">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+      </div>
+    </div>
+
+    <div class="svc-card reveal d1">
+      <div class="svc-num">02</div>
+      <h3 class="svc-title">Biostimulation<br>Therapies</h3>
+      <div class="svc-tags">
+        <span class="svc-tag">PRP Treatments</span>
+        <span class="svc-tag">Exosomes</span>
+        <span class="svc-tag">RF Microneedling</span>
+        <span class="svc-tag">Collagen Induction</span>
+        <span class="svc-tag">Regenerative Skin Therapy</span>
+      </div>
+      <p class="svc-desc">"Advanced regenerative therapies that stimulate collagen production, improve cellular repair, and restore long-term skin vitality from within."</p>
+      <div class="svc-arrow">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+      </div>
+    </div>
+
+    <div class="svc-card reveal d2">
+      <div class="svc-num">03</div>
+      <h3 class="svc-title">Skin<br>Renewal</h3>
+      <div class="svc-tags">
+        <span class="svc-tag">Microneedling</span>
+        <span class="svc-tag">Medical Facials</span>
+        <span class="svc-tag">Medical-Grade Skincare</span>
+        <span class="svc-tag">Facial Rejuvenation</span>
+        <span class="svc-tag">Skin Barrier Repair</span>
+      </div>
+      <p class="svc-desc">"Clinical skin renewal protocols focused on improving texture, hydration, tone, and overall skin health through evidence-based care."</p>
+      <div class="svc-arrow">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+      </div>
+    </div>
+
+    <div class="svc-card reveal">
+      <div class="svc-num">04</div>
+      <h3 class="svc-title">Laser &amp;<br>Advanced Correction</h3>
+      <div class="svc-tags">
+        <span class="svc-tag">Laser Skin Rejuvenation</span>
+        <span class="svc-tag">Laser Hair Removal</span>
+        <span class="svc-tag">Melasma Treatments</span>
+        <span class="svc-tag">Pigmentation Correction</span>
+        <span class="svc-tag">Acne Scar Revision</span>
+        <span class="svc-tag">Rosacea Treatments</span>
+      </div>
+      <p class="svc-desc">"Advanced laser and corrective treatments designed to improve skin clarity, texture, pigmentation, and long-term skin quality."</p>
+      <div class="svc-arrow">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+      </div>
+    </div>
+
+    <div class="svc-card reveal d1">
+      <div class="svc-num">05</div>
+      <h3 class="svc-title">Consultations<br>&amp; Analysis</h3>
+      <div class="svc-tags">
+        <span class="svc-tag">Facial Rejuvenation Consultations</span>
+        <span class="svc-tag">Skin Analysis</span>
+        <span class="svc-tag">Long-Term Treatment Planning</span>
+        <span class="svc-tag">Combination Treatment Mapping</span>
+        <span class="svc-tag">Preventative Aesthetic Planning</span>
+      </div>
+      <p class="svc-desc">"Comprehensive physician-led consultations focused on understanding your skin biology, lifestyle, concerns, and long-term aesthetic goals."</p>
+      <div class="svc-arrow">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+      </div>
+    </div>
+
+    <div class="svc-card reveal d2">
+      <div class="svc-num">06</div>
+      <h3 class="svc-title">Regenerative<br>Wellness</h3>
+      <div class="svc-tags">
+        <span class="svc-tag">IV Infusions for Skin Glow</span>
+        <span class="svc-tag">Energy Support IV Therapy</span>
+        <span class="svc-tag">Iron Deficiency Infusions</span>
+        <span class="svc-tag">Hydration Therapy</span>
+        <span class="svc-tag">Hair Restoration</span>
+        <span class="svc-tag">Scalp Regeneration</span>
+      </div>
+      <p class="svc-desc">"Internal wellness and regenerative therapies designed to support vitality, recovery, skin health, and long-term wellbeing through physician-guided care."</p>
+      <div class="svc-arrow">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Service detail panel -->
+  <div class="svc-detail" id="svcDetail">
+    <div class="svc-detail-inner">
+      <div>
+        <div class="svc-detail-num" id="detailNum"></div>
+        <h3 class="svc-detail-title" id="detailTitle"></h3>
+        <p class="svc-detail-desc" id="detailDesc"></p>
+      </div>
+      <div>
+        <div class="svc-detail-label">Treatments Include</div>
+        <ul class="svc-detail-list" id="detailList"></ul>
+      </div>
+      <div class="svc-detail-right">
+        <p class="svc-detail-note" id="detailNote"></p>
+        <a href="#booking" class="btn-pri svc-detail-cta">
+          Book Consultation
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+        <button class="svc-detail-close" id="svcDetailClose">&#x2715;</button>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════ SCIENCE ══════════ -->
+<section id="science">
+  <div class="science-layout">
+    <div>
+      <div class="eyebrow reveal" style="color:var(--terra)">The Method</div>
+      <h2 class="science-h2 reveal d1">
+        Cellular repair,<br>clinically<br><em>engineered.</em>
+      </h2>
+      <p class="science-lead reveal d2">
+        Every modality we deploy operates at a biological level - stimulating fibroblasts, activating growth factor cascades, or restructuring dermal architecture. We don't mask. We rebuild.
+      </p>
+      <div class="sci-table reveal d3">
+        <div class="sci-row">
+          <span class="sci-lbl">Primary Mechanism</span>
+          <span class="sci-val">Autologous biostimulation</span>
+        </div>
+        <div class="sci-row">
+          <span class="sci-lbl">Tissue Depth</span>
+          <span class="sci-val">Dermal &amp; subdermal</span>
+        </div>
+        <div class="sci-row">
+          <span class="sci-lbl">Protocol Basis</span>
+          <span class="sci-val">Peer-reviewed literature</span>
+        </div>
+        <div class="sci-row">
+          <span class="sci-lbl">Assessment Method</span>
+          <span class="sci-val">Ultrasound dermography</span>
+        </div>
+      </div>
+    </div>
+    <div class="tech-grid reveal d1">
+      <div class="tech-card">
+        <div class="tech-num">T-01</div>
+        <div class="tech-name">Polynucleotides</div>
+        <p class="tech-desc">DNA-fragment chains that bind fibroblast receptors, triggering collagen and elastin synthesis at the cellular level.</p>
+        <span class="tech-badge">DNA Repair</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-num">T-02</div>
+        <div class="tech-name">PRP Therapy</div>
+        <p class="tech-desc">Concentrated autologous growth factors - PDGF, TGF-β, VEGF - delivered precisely to initiate tissue remodelling.</p>
+        <span class="tech-badge">Growth Factor Cascade</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-num">T-03</div>
+        <div class="tech-name">Profhilo®</div>
+        <p class="tech-desc">Ultra-pure hybrid HA that bioremodels by stimulating four types of skin collagen and elastin simultaneously.</p>
+        <span class="tech-badge">Bioremodelling</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-num">T-04</div>
+        <div class="tech-name">RF Microneedling</div>
+        <p class="tech-desc">Fractional radiofrequency energy delivered to precise dermal depths - controlled thermal induction without surface damage.</p>
+        <span class="tech-badge">Thermal Induction</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-num">T-05</div>
+        <div class="tech-name">Exosome Therapy</div>
+        <p class="tech-desc">Cell-derived nanovesicles that carry signalling molecules across membranes, modulating inflammation and regeneration.</p>
+        <span class="tech-badge">Paracrine Signalling</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-num">T-06</div>
+        <div class="tech-name">Biorevitalisation</div>
+        <p class="tech-desc">Microinjections of stabilised HA combined with antioxidants and amino acids to reset the dermal microenvironment.</p>
+        <span class="tech-badge">Matrix Reset</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PROCESS ══════════ -->
+<section id="process">
+  <div class="process-wrap">
+    <div class="process-hd">
+      <div>
+        <div class="eyebrow reveal" style="color:var(--terra)">The Process</div>
+        <h2 class="process-h2 reveal d1">How it<br><em>works.</em></h2>
+      </div>
+      <p class="process-desc reveal d2">Our four-stage methodology ensures every client receives a treatment plan that is as individual as their skin. No defaults, no templates - only thoughtful, evidence-based care.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-dot"></div>
+        <div class="step-num">Step 01</div>
+        <h3 class="step-title">Consultation</h3>
+        <p class="step-desc">A thorough 60-minute session with your clinician. We listen first, then build a complete picture of your skin history, goals, and lifestyle.</p>
+      </div>
+      <div class="step reveal d1">
+        <div class="step-dot"></div>
+        <div class="step-num">Step 02</div>
+        <h3 class="step-title">Skin Assessment</h3>
+        <p class="step-desc">Advanced imaging and analysis to objectively understand your skin's condition - hydration, texture, pigmentation, and cellular health.</p>
+      </div>
+      <div class="step reveal d2">
+        <div class="step-dot"></div>
+        <div class="step-num">Step 03</div>
+        <h3 class="step-title">Personalised Plan</h3>
+        <p class="step-desc">A bespoke multi-stage treatment protocol designed specifically around your skin biology, timeline, and desired outcomes.</p>
+      </div>
+      <div class="step reveal d3">
+        <div class="step-dot"></div>
+        <div class="step-num">Step 04</div>
+        <h3 class="step-title">Ongoing Care</h3>
+        <p class="step-desc">Regular review appointments to track progress, adjust your protocol, and sustain your results as your skin evolves with you.</p>
+      </div>
+    </div>
+    <div class="process-ft reveal">
+      <span class="process-ft-text">Ready to begin your<br><em>skin journey?</em></span>
+      <a href="#booking" class="btn-pri">
+        Start Here
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TEAM ══════════ -->
+<section id="team">
+  <div class="team-layout">
+
+    <!-- Left - intro -->
+    <div class="team-left">
+      <div class="team-eyebrow reveal">Led By</div>
+      <h2 class="team-h2 reveal d1">The hands behind<br>your skin.</h2>
+      <p class="team-intro reveal d2">Every treatment at Bare Clinic is physician-led from consultation to completion. No delegation, no shortcuts. You see the same clinician who assessed your skin, designed your plan, and will review your results.</p>
+    </div>
+
+    <!-- Right - clinician card -->
+    <div class="team-right reveal d1">
+      <div class="clin-card">
+        <div class="clin-name">Dr. Naila Siraj</div>
+        <div class="clin-role">Founder &amp; Lead Clinician</div>
+        <p class="clin-oneliner">Family physician. Medical aesthetician. Committed to natural results.</p>
+        <p class="clin-bio">Dr. Siraj brings the rigour of family medicine to every aesthetic consultation. Board-certified in medical aesthetics and injectables by the Canadian Board of Aesthetic Medicine, she combines clinical precision with a deeply conservative approach - enhancing what is there, never overriding it.</p>
+        <div class="clin-creds">
+          <span class="cred">Licensed Family Physician - Ontario</span>
+          <span class="cred">Board Certified · Canadian Board of Aesthetic Medicine</span>
+          <span class="cred">Advanced Training in Facial Rejuvenation &amp; Skin Health</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Certifications row -->
+  <div class="certs-wrap reveal">
+    <div class="certs-eyebrow">Certifications &amp; Credentials</div>
+    <div class="certs-grid">
+      <div class="cert-item"><img src="Certifications (1).jpeg" alt="Certification"></div>
+      <div class="cert-item"><img src="Certifications (2).jpeg" alt="Certification"></div>
+      <div class="cert-item"><img src="Certifications (3).jpeg" alt="Certification"></div>
+      <div class="cert-item"><img src="Certifications (4).jpeg" alt="Certification"></div>
+      <div class="cert-item"><img src="Certifications (5).jpeg" alt="Certification"></div>
+      <div class="cert-item"><img src="Certifications (6).jpeg" alt="Certification"></div>
+      <div class="cert-item"><img src="Certifications (7).jpeg" alt="Certification"></div>
+      <div class="cert-item"><img src="Certifications (8).jpeg" alt="Certification"></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════ OUTCOMES ══════════ -->
+<section id="outcomes">
+  <div class="outcomes-hd">
+    <div>
+      <div class="eyebrow reveal" style="color:var(--cream)">Clinical Outcomes</div>
+      <h2 class="outcomes-h2 reveal d1">Results<br>measured,<br><em>not claimed.</em></h2>
+    </div>
+    <p class="outcomes-sub reveal d2">We track outcomes with the same rigour we apply to treatment. Every figure below is derived from internal clinical data, independent of marketing.</p>
+  </div>
+  <div class="outcomes-grid">
+    <div class="outcome reveal">
+      <div class="outcome-num">94%</div>
+      <div class="outcome-label">Report meaningful improvement in skin quality by week 8</div>
+      <div class="outcome-src">Bare Clinic Outcome Survey · 2024 · n=412</div>
+    </div>
+    <div class="outcome reveal d1">
+      <div class="outcome-num">2.8×</div>
+      <div class="outcome-label">Average increase in dermal collagen density post-biostimulation</div>
+      <div class="outcome-src">Ultrasound Dermography · 6-week post-treatment</div>
+    </div>
+    <div class="outcome reveal d2">
+      <div class="outcome-num">6wk</div>
+      <div class="outcome-label">Typical onset of first visible regenerative response across protocols</div>
+      <div class="outcome-src">Protocol Baseline · 847 treatments · 2022–2024</div>
+    </div>
+    <div class="outcome reveal d3">
+      <div class="outcome-num">4.9</div>
+      <div class="outcome-label">Average clinician rating across all post-treatment reviews</div>
+      <div class="outcome-src">312 Verified Reviews · Independent Platform</div>
+    </div>
+  </div>
+  <p class="outcomes-fn reveal">All data derived from internal clinical records and independently verified post-treatment surveys. No before/after imagery is used in our patient communications. Outcomes vary by individual biology, treatment selection, and post-care compliance.</p>
+</section>
+
+<!-- ══════════ INSIGHTS ══════════ -->
+<section id="insights">
+  <div class="insights-hd">
+    <div>
+      <div class="eyebrow reveal" style="color:var(--terra)">Knowledge &amp; Insight</div>
+      <h2 class="insights-h2 reveal d1">Our<br><em>Blog</em></h2>
+    </div>
+    <a href="#" class="view-all reveal d2">
+      View All Articles
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </a>
+  </div>
+  <div class="insights-grid">
+
+    <div class="ins-card ins-card-feat reveal">
+      <div class="ins-thumb">
+        <img src="Our blog image1.jpg" alt="" loading="lazy">
+      </div>
+      <div class="ins-body">
+        <div class="ins-cat">Regeneration</div>
+        <h3 class="ins-title">Why Biostimulation Is Replacing Traditional Filler Protocols</h3>
+        <p class="ins-excerpt">The shift towards collagen-inducing treatments represents a fundamental rethinking of what aesthetic medicine is for. Here's what the science says.</p>
+        <div class="ins-meta">March 2025 · 8 min read</div>
+      </div>
+    </div>
+
+    <div class="ins-card reveal d1">
+      <div class="ins-thumb">
+        <img src="skin science.jpg" alt="" loading="lazy">
+      </div>
+      <div class="ins-body">
+        <div class="ins-cat">Skin Science</div>
+        <h3 class="ins-title">Understanding Your Skin Barrier: The Foundation of Everything</h3>
+        <p class="ins-excerpt">Before any treatment, any product, any protocol - your skin barrier is the starting point. When it's compromised, nothing else works as it should. Here's what it is and why it matters.</p>
+        <div class="ins-meta">February 2025 · 5 min read</div>
+      </div>
+    </div>
+
+    <div class="ins-card reveal d2">
+      <div class="ins-thumb">
+        <img src="Treatments.jpg" alt="" loading="lazy">
+      </div>
+      <div class="ins-body">
+        <div class="ins-cat">Treatment Guide</div>
+        <h3 class="ins-title">PRP vs Exosomes: A Clinician's Honest Comparison</h3>
+        <p class="ins-excerpt">Both are regenerative. Both are popular. But they work differently and suit different skin concerns. A straightforward clinical breakdown of when to choose one over the other.</p>
+        <div class="ins-meta">January 2025 · 6 min read</div>
+      </div>
+    </div>
+
+    <div class="ins-card reveal d1">
+      <div class="ins-thumb">
+        <img src="Lifestyle.jpg" alt="" loading="lazy">
+      </div>
+      <div class="ins-body">
+        <div class="ins-cat">Lifestyle</div>
+        <h3 class="ins-title">The Role of Sleep, Stress, and Nutrition in Skin Regeneration</h3>
+        <p class="ins-excerpt">Topicals and treatments account for only part of the equation. Your daily biology - how well you sleep, how you manage stress, what you eat - shapes your skin more than most people realise.</p>
+        <div class="ins-meta">December 2024 · 4 min read</div>
+      </div>
+    </div>
+
+    <div class="ins-card reveal d2">
+      <div class="ins-thumb">
+        <img src="Clinic.jpg" alt="" loading="lazy">
+      </div>
+      <div class="ins-body">
+        <div class="ins-cat">Clinic Notes</div>
+        <h3 class="ins-title">Bare Clinic's 2025 Treatment Protocol Review</h3>
+        <p class="ins-excerpt">Each year we review our treatment protocols against the latest clinical evidence. Here's what changed, what we added, and what we decided to leave behind.</p>
+        <div class="ins-meta">November 2024 · 3 min read</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ TESTIMONIALS ══════════ -->
+<section id="testimonials">
+  <div class="testi-hd">
+    <div>
+      <div class="eyebrow reveal" style="color:var(--cream)">Client Experiences</div>
+      <h2 class="testi-h2 reveal d1">Spoken by<br><em>real clients.</em></h2>
+    </div>
+    <p class="testi-sub reveal d2">We let results speak first, and people speak second. No filters, no embellishment - just honest accounts of skin transformed.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi reveal">
+      <div class="q-icon">"</div>
+      <p class="q-body">"I came in expecting to be sold a product. Instead, I was given a plan. Six months later, my skin looks genuinely different - not 'done', just healthy and alive."</p>
+      <div class="q-name">Amara K.</div>
+      <div class="q-detail">Skin Regeneration Programme · 6 months</div>
+    </div>
+    <div class="testi reveal d1">
+      <div class="q-icon">"</div>
+      <p class="q-body">"The consultation alone was worth it. They explained my skin in a way no one ever had. I understood why I was breaking out at 38. That knowledge changed everything."</p>
+      <div class="q-name">Leila M.</div>
+      <div class="q-detail">Personalised Assessment · 3 visits</div>
+    </div>
+    <div class="testi reveal d2">
+      <div class="q-icon">"</div>
+      <p class="q-body">"Not a single upsell. Not one. They told me what my skin actually needed, declined to treat what it didn't, and sent me home with more confidence than product."</p>
+      <div class="q-name">James T.</div>
+      <div class="q-detail">Preventative Programme · 12 months</div>
+    </div>
+  </div>
+  <div class="testi-bar reveal">
+    <div class="stars">
+      <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+    </div>
+    <div class="rating-lbl">4.9 / 5.0 average · 312 verified reviews</div>
+    <a href="#" class="view-all" style="font-size:.68rem;color:var(--cream)">
+      Read All Reviews
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════ BOOKING ══════════ -->
+
+<section id="booking">
+  <div class="booking-layout">
+    <div>
+      <div class="eyebrow reveal" style="color:var(--terra)">Start Your Journey</div>
+      <h2 class="booking-h2 reveal d1">
+        Begin Your<br>Skin<br><em>Journey.</em>
+      </h2>
+      <p class="booking-sub reveal d2">
+        Your first consultation is a conversation - not a commitment. We'll assess your skin, understand your goals, and tell you honestly what will and won't work for you.
+      </p>
+      <div class="assurances reveal d3">
+        <span class="assurance">No commitment required at consultation</span>
+        <span class="assurance">60-minute deep-dive with a senior clinician</span>
+        <span class="assurance">Written protocol provided regardless of booking</span>
+        <span class="assurance">We decline to treat what your skin doesn't need</span>
+      </div>
+      <div class="reveal d4">
+        <a href="#" class="btn-pri">
+          View Full Treatment Menu
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="reveal d1">
+      <div class="form-wrap">
+        <div class="form-title">Request a Consultation</div>
+        <div class="f-field">
+          <label class="f-label">Full Name</label>
+          <input class="f-input" type="text" placeholder="Your full name">
+        </div>
+        <div class="f-field">
+          <label class="f-label">Email Address</label>
+          <input class="f-input" type="email" placeholder="your@email.com">
+        </div>
+        <div class="f-field">
+          <label class="f-label">Phone Number</label>
+          <input class="f-input" type="tel" placeholder="+44 (0) 000 0000 000">
+        </div>
+        <div class="f-field">
+          <label class="f-label">Treatment Interest</label>
+          <div class="f-select-wrap"><select class="f-select" id="treatmentSelect">
+            <option value="" disabled selected style="background:#94573d;color:#f8f1e7">Select a treatment area</option>
+            <optgroup label="Regenerative Injectables" style="background:#94573d;color:#f8f1e7">
+              <option style="background:#94573d;color:#f8f1e7">Neuromodulators (Botox / Dysport)</option>
+              <option style="background:#94573d;color:#f8f1e7">Dermal Fillers</option>
+              <option style="background:#94573d;color:#f8f1e7">Skin Boosters</option>
+              <option style="background:#94573d;color:#f8f1e7">Profhilo</option>
+            </optgroup>
+            <optgroup label="Biostimulation Therapies" style="background:#94573d;color:#f8f1e7">
+              <option style="background:#94573d;color:#f8f1e7">PRP Treatments</option>
+              <option style="background:#94573d;color:#f8f1e7">Exosomes</option>
+              <option style="background:#94573d;color:#f8f1e7">Mesotherapy</option>
+            </optgroup>
+            <optgroup label="Skin Renewal" style="background:#94573d;color:#f8f1e7">
+              <option style="background:#94573d;color:#f8f1e7">Microneedling</option>
+              <option style="background:#94573d;color:#f8f1e7">Facial Rejuvenation</option>
+              <option style="background:#94573d;color:#f8f1e7">Medical-Grade Skincare</option>
+            </optgroup>
+            <optgroup label="Hair Restoration" style="background:#94573d;color:#f8f1e7">
+              <option style="background:#94573d;color:#f8f1e7">PRP Hair Restoration</option>
+              <option style="background:#94573d;color:#f8f1e7">Exosome Hair Therapy</option>
+              <option style="background:#94573d;color:#f8f1e7">Scalp Regeneration</option>
+            </optgroup>
+            <optgroup label="Consultations &amp; Analysis" style="background:#94573d;color:#f8f1e7">
+              <option style="background:#94573d;color:#f8f1e7">Facial Rejuvenation Consultation</option>
+              <option style="background:#94573d;color:#f8f1e7">Skin Analysis</option>
+              <option style="background:#94573d;color:#f8f1e7">Long-Term Treatment Planning</option>
+            </optgroup>
+            <optgroup label="Personalised Care" style="background:#94573d;color:#f8f1e7">
+              <option style="background:#94573d;color:#f8f1e7">Combination Treatments</option>
+              <option style="background:#94573d;color:#f8f1e7">Ongoing Review</option>
+              <option style="background:#94573d;color:#f8f1e7">Conservative Treatment Planning</option>
+            </optgroup>
+            <option style="background:#94573d;color:#f8f1e7">General Skin Consultation</option>
+          </select></div>
+        </div>
+        <div class="f-field">
+          <label class="f-label">About Your Skin (optional)</label>
+          <textarea class="f-area" rows="3" placeholder="Current concerns, previous treatments, goals…"></textarea>
+        </div>
+        <button class="f-submit">Request Appointment →</button>
+        <p class="f-note">We respond within one business day. All consultations are confidential and conducted by a registered clinician.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <span class="f-logo"><img src="White Logo.png" alt="Bare Clinic" class="f-logo-img"></span>
+      <p class="f-tagline">Regenerative aesthetics grounded in science. Personalised care built around your biology.</p>
+      <div class="f-social">
+        <a href="#" class="soc" aria-label="LinkedIn">In</a>
+        <a href="#" class="soc" aria-label="Instagram">Ig</a>
+        <a href="#" class="soc" aria-label="Facebook">Fb</a>
+      </div>
+    </div>
+    <div>
+      <div class="f-col-title">Treatments</div>
+      <ul class="f-nav">
+        <li><a href="#">Skin Regeneration</a></li>
+        <li><a href="#">Preventative Aesthetics</a></li>
+        <li><a href="#">Personalised Plans</a></li>
+        <li><a href="#">View All Treatments</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Clinic</div>
+      <ul class="f-nav">
+        <li><a href="#">Our Philosophy</a></li>
+        <li><a href="#">The Clinicians</a></li>
+        <li><a href="#">The Science</a></li>
+        <li><a href="#">Blog &amp; Insights</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Contact</div>
+      <ul class="f-nav">
+        <li><a href="#">Book Consultation</a></li>
+        <li><a href="#">hello@bareclinic.co</a></li>
+        <li><a href="#">+44 20 0000 0000</a></li>
+        <li><a href="#">Find Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Locations</div>
+      <ul class="f-nav">
+        <li><a href="#">Aurora</a></li>
+        <li><a href="#">Ballantrae</a></li>
+        <li><a href="#">Stouffville</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="f-legal">© 2026 Bare Clinic. All rights reserved. &nbsp;·&nbsp; <a href="#">Privacy</a> &nbsp;·&nbsp; <a href="#">Terms</a></span>
+    <span class="f-legal" style="color:rgba(248,241,231,.45);letter-spacing:.14em;font-size:.65rem">Natural &nbsp;·&nbsp; Refined &nbsp;·&nbsp; Ethical</span>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">Close</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev">&#8592;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="Certification">
+  <button class="lightbox-nav lightbox-next" id="lightboxNext">&#8594;</button>
+</div>
+
+<script>
+
+/* ─── LIGHTBOX ─── */
+(function(){
+  const lb=document.getElementById('lightbox');
+  const lbImg=document.getElementById('lightboxImg');
+  const lbClose=document.getElementById('lightboxClose');
+  const lbPrev=document.getElementById('lightboxPrev');
+  const lbNext=document.getElementById('lightboxNext');
+  const imgs=[...document.querySelectorAll('.cert-item img')];
+  let current=0;
+  function open(i){
+    current=i;
+    lbImg.src=imgs[current].src;
+    lb.classList.add('active');
+    document.body.style.overflow='hidden';
+  }
+  function close(){
+    lb.classList.remove('active');
+    document.body.style.overflow='';
+  }
+  function prev(){open((current-1+imgs.length)%imgs.length)}
+  function next(){open((current+1)%imgs.length)}
+  imgs.forEach((img,i)=>img.parentElement.addEventListener('click',()=>open(i)));
+  lbClose.addEventListener('click',close);
+  lbPrev.addEventListener('click',prev);
+  lbNext.addEventListener('click',next);
+  lb.addEventListener('click',e=>{if(e.target===lb)close()});
+  document.addEventListener('keydown',e=>{
+    if(!lb.classList.contains('active'))return;
+    if(e.key==='Escape')close();
+    if(e.key==='ArrowLeft')prev();
+    if(e.key==='ArrowRight')next();
+  });
+})();
+
+/* ─── SERVICE DETAIL PANEL ─── */
+(function(){
+  const data={
+    '01':{
+      title:'Regenerative\nInjectables',
+      desc:'Physician-administered injectable treatments designed with precision and restraint. Every injection is placed with an understanding of facial anatomy, ageing biology, and the principle that less — done well — is always more.',
+      treatments:['Neuromodulators (Botox / Dysport)','Dermal Fillers','Skin Boosters','Profhilo','Mesotherapy'],
+      note:'"All injectable treatments at Bare Clinic are administered exclusively by Dr. Naila Siraj — physician-designed, conservative-first, and never delegated."'
+    },
+    '02':{
+      title:'Biostimulation\nTherapies',
+      desc:'Advanced regenerative treatments that work at a biological level — activating your skin\'s own repair systems to produce lasting improvements in collagen density, elasticity, and cellular vitality.',
+      treatments:['PRP Treatments','Exosomes','RF Microneedling','Collagen Induction','Regenerative Skin Therapy'],
+      note:'"Results develop gradually over 4–8 weeks as your biology responds. Biostimulation is a commitment to long-term skin health — not a quick fix."'
+    },
+    '03':{
+      title:'Skin\nRenewal',
+      desc:'Evidence-based clinical protocols that restore skin texture, hydration, and tone through controlled resurfacing and barrier-focused care. Every protocol is paired with a personalised homecare plan.',
+      treatments:['Microneedling','Medical Facials','Medical-Grade Skincare','Facial Rejuvenation','Skin Barrier Repair'],
+      note:'"Skin renewal works best as a programme — your clinician will design a sequenced protocol with review appointments to track and sustain your results."'
+    },
+    '04':{
+      title:'Laser &\nAdvanced Correction',
+      desc:'Medical-grade laser and corrective treatments for targeted improvements in pigmentation, clarity, texture, and chronic skin conditions. All protocols are preceded by a full skin assessment.',
+      treatments:['Laser Skin Rejuvenation','Laser Hair Removal','Melasma Treatments','Pigmentation Correction','Acne Scar Revision','Rosacea Treatments'],
+      note:'"Corrective treatments are precision medicine. Each protocol is matched to your skin type, concern, and history — nothing is applied without a thorough assessment first."'
+    },
+    '05':{
+      title:'Consultations\n& Analysis',
+      desc:'Comprehensive physician-led consultations that begin with listening. We take time to understand your skin history, lifestyle, and goals before recommending anything — and we always tell you what you don\'t need.',
+      treatments:['Facial Rejuvenation Consultations','Skin Analysis','Long-Term Treatment Planning','Combination Treatment Mapping','Preventative Aesthetic Planning'],
+      note:'"Your first consultation includes a full skin assessment and a written protocol with no obligation to proceed. We believe informed patients make the best decisions."'
+    },
+    '06':{
+      title:'Regenerative\nWellness',
+      desc:'Internal regenerative therapies that support your skin, energy, and vitality from within. Physician-prescribed and tailored to your health profile — because great skin starts with a healthy body.',
+      treatments:['IV Infusions for Skin Glow','Energy Support IV Therapy','Iron Deficiency Infusions','Hydration Therapy','Hair Restoration','Scalp Regeneration'],
+      note:'"Wellness therapies are prescribed after a physician consultation. We assess your health profile and goals before recommending any infusion or regenerative treatment."'
+    }
+  };
+
+  const panel=document.getElementById('svcDetail');
+  const closeBtn=document.getElementById('svcDetailClose');
+  let activeCard=null;
+
+  function openPanel(num,card){
+    const d=data[num];
+    if(!d)return;
+    document.getElementById('detailNum').textContent='0'+num.replace('0','');
+    document.getElementById('detailTitle').innerHTML=d.title.replace('\n','<br>');
+    document.getElementById('detailDesc').textContent=d.desc;
+    document.getElementById('detailList').innerHTML=d.treatments.map(t=>`<li>${t}</li>`).join('');
+    document.getElementById('detailNote').textContent=d.note;
+    panel.classList.add('open');
+    activeCard=card;
+    setTimeout(()=>{
+      const top=panel.getBoundingClientRect().top+window.scrollY-100;
+      window.scrollTo({top,behavior:'smooth'});
+    },80);
+  }
+
+  function closePanel(){
+    panel.classList.remove('open');
+    activeCard=null;
+  }
+
+  document.querySelectorAll('.svc-card').forEach((card,i)=>{
+    const num=String(i+1).padStart(2,'0');
+    card.style.cursor='pointer';
+    card.addEventListener('click',e=>{
+      e.preventDefault();
+      if(activeCard===card){closePanel();return;}
+      openPanel(num,card);
+    });
+  });
+
+  closeBtn.addEventListener('click',closePanel);
+})();
+
+/* ─── SELECT COLOUR ─── */
+(function(){
+  const sel=document.getElementById('treatmentSelect');
+  if(!sel)return;
+  sel.addEventListener('change',()=>sel.classList.toggle('selected',sel.value!==''));
+})();
+
+/* ─── HERO CANVAS ─── */
+(function(){
+  const canvas=document.getElementById('heroCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const C='rgba(248,241,231,';
+  let W,H,pts;
+  function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight}
+  function mk(){return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2,r:Math.random()*1.4+.4,o:Math.random()*.3+.1}}
+  function init(){resize();const n=Math.min(Math.floor(W*H/8500),80);pts=Array.from({length:n},mk)}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<pts.length;i++){
+      for(let j=i+1;j<pts.length;j++){
+        const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<120){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=C+(1-d/120)*.09+')';ctx.lineWidth=.5;ctx.stroke()}
+      }
+    }
+    pts.forEach(p=>{
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=C+p.o+')';ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<-8||p.x>W+8)p.vx*=-1;
+      if(p.y<-8||p.y>H+8)p.vy*=-1;
+    });
+    requestAnimationFrame(draw);
+  }
+  init();draw();
+  let t;window.addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(init,180)});
+})();
+
+/* ─── NAVBAR ─── */
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('scrolled',window.scrollY>60);
+},{passive:true});
+
+/* ─── REVEAL ─── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
+},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>obs.observe(el));
+
+/* ─── MOBILE MENU ─── */
+const mob=document.getElementById('mobMenu');
+document.getElementById('menuToggle').addEventListener('click',()=>mob.classList.add('open'));
+document.getElementById('mobClose').addEventListener('click',()=>mob.classList.remove('open'));
+document.querySelectorAll('.mob-link').forEach(l=>l.addEventListener('click',()=>mob.classList.remove('open')));
+</script>
+</body>
+</html>
